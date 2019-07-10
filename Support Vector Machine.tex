@@ -1,0 +1,1248 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    \usepackage{mathrsfs}
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+    \definecolor{ansi-default-inverse-fg}{HTML}{FFFFFF}
+    \definecolor{ansi-default-inverse-bg}{HTML}{000000}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatibility definitions
+    \def\gt{>}
+    \def\lt{<}
+    \let\Oldtex\TeX
+    \let\Oldlatex\LaTeX
+    \renewcommand{\TeX}{\textrm{\Oldtex}}
+    \renewcommand{\LaTeX}{\textrm{\Oldlatex}}
+    % Document parameters
+    % Document title
+    \title{Support Vector Machine}
+    
+    
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{from} \PY{n+nn}{numpy} \PY{k}{import} \PY{n}{linalg}
+        \PY{k+kn}{import} \PY{n+nn}{cvxopt}
+        \PY{k+kn}{import} \PY{n+nn}{cvxopt}\PY{n+nn}{.}\PY{n+nn}{solvers}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{creditcard.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{data} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{genfromtxt}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{creditcard.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{delimiter}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:}    Time        V1        V2        V3        V4        V5        V6        V7  \textbackslash{}
+        0   0.0 -1.359807 -0.072781  2.536347  1.378155 -0.338321  0.462388  0.239599   
+        1   0.0  1.191857  0.266151  0.166480  0.448154  0.060018 -0.082361 -0.078803   
+        2   1.0 -1.358354 -1.340163  1.773209  0.379780 -0.503198  1.800499  0.791461   
+        3   1.0 -0.966272 -0.185226  1.792993 -0.863291 -0.010309  1.247203  0.237609   
+        4   2.0 -1.158233  0.877737  1.548718  0.403034 -0.407193  0.095921  0.592941   
+        
+                 V8        V9  {\ldots}         V21       V22       V23       V24  \textbackslash{}
+        0  0.098698  0.363787  {\ldots}   -0.018307  0.277838 -0.110474  0.066928   
+        1  0.085102 -0.255425  {\ldots}   -0.225775 -0.638672  0.101288 -0.339846   
+        2  0.247676 -1.514654  {\ldots}    0.247998  0.771679  0.909412 -0.689281   
+        3  0.377436 -1.387024  {\ldots}   -0.108300  0.005274 -0.190321 -1.175575   
+        4 -0.270533  0.817739  {\ldots}   -0.009431  0.798278 -0.137458  0.141267   
+        
+                V25       V26       V27       V28  Amount  Class  
+        0  0.128539 -0.189115  0.133558 -0.021053  149.62      0  
+        1  0.167170  0.125895 -0.008983  0.014724    2.69      0  
+        2 -0.327642 -0.139097 -0.055353 -0.059752  378.66      0  
+        3  0.647376 -0.221929  0.062723  0.061458  123.50      0  
+        4 -0.206010  0.502292  0.219422  0.215153   69.99      0  
+        
+        [5 rows x 31 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{np}\PY{o}{.}\PY{n}{shape}\PY{p}{(}\PY{n}{data}\PY{p}{)} 
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:} (284808, 31)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{redata}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{:}\PY{l+m+mi}{30}\PY{p}{]}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{np}\PY{o}{.}\PY{n}{shape}\PY{p}{(}\PY{n}{redata}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}6}]:} (284807, 29)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{datalabel}\PY{o}{=}\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Class}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{label}\PY{o}{=}\PY{n}{datalabel}\PY{o}{.}\PY{n}{values}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{np}\PY{o}{.}\PY{n}{shape}\PY{p}{(}\PY{n}{label}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:} (284807,)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{RepeatedKFold} 
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{X11} \PY{o}{=} \PY{n}{redata}\PY{p}{[}\PY{n}{label}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{X22} \PY{o}{=} \PY{n}{redata}\PY{p}{[}\PY{n}{label}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{]}
+         
+         
+         \PY{n}{rkf} \PY{o}{=} \PY{n}{RepeatedKFold}\PY{p}{(}\PY{n}{n\PYZus{}splits}\PY{o}{=}\PY{l+m+mi}{50}\PY{p}{,} \PY{n}{n\PYZus{}repeats}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)} 
+         
+         \PY{k}{for} \PY{n}{train\PYZus{}index}\PY{p}{,} \PY{n}{test\PYZus{}index} \PY{o+ow}{in} \PY{n}{rkf}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{n}{X11}\PY{p}{)}\PY{p}{:}
+             \PY{n}{X\PYZus{}train1}\PY{p}{,} \PY{n}{X\PYZus{}test1} \PY{o}{=} \PY{n}{X11}\PY{p}{[}\PY{n}{train\PYZus{}index}\PY{p}{]}\PY{p}{,} \PY{n}{X11}\PY{p}{[}\PY{n}{test\PYZus{}index}\PY{p}{]}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{np}\PY{o}{.}\PY{n}{shape}\PY{p}{(}\PY{n}{X\PYZus{}test1}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}14}]:} (5686, 29)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{rkf} \PY{o}{=} \PY{n}{RepeatedKFold}\PY{p}{(}\PY{n}{n\PYZus{}splits}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{n\PYZus{}repeats}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{)} 
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{k}{def} \PY{n+nf}{linear\PYZus{}kernel}\PY{p}{(}\PY{n}{x1}\PY{p}{,} \PY{n}{x2}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{x1}\PY{p}{,} \PY{n}{x2}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{k}{class} \PY{n+nc}{SVM}\PY{p}{(}\PY{n+nb}{object}\PY{p}{)}\PY{p}{:}
+             
+             \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{kernel}\PY{o}{=}\PY{n}{linear\PYZus{}kernel}\PY{p}{,} \PY{n}{C}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{kernel} \PY{o}{=} \PY{n}{kernel}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{C} \PY{o}{=} \PY{n}{C}
+                 \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{C} \PY{o+ow}{is} \PY{o+ow}{not} \PY{k+kc}{None}\PY{p}{:} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{C} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{C}\PY{p}{)}
+             
+             \PY{k}{def} \PY{n+nf}{fit}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{n\PYZus{}samples}\PY{p}{,} \PY{n}{n\PYZus{}features} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{shape}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+                 
+                 \PY{c+c1}{\PYZsh{} Gram matrix}
+                 \PY{n}{K} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{n\PYZus{}samples}\PY{p}{,} \PY{n}{n\PYZus{}samples}\PY{p}{)}\PY{p}{)}
+                 \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n\PYZus{}samples}\PY{p}{)}\PY{p}{:}
+                     \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n\PYZus{}samples}\PY{p}{)}\PY{p}{:}
+                         \PY{n}{K}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{]} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{kernel}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{X}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{)}
+                 
+                 \PY{n}{P} \PY{o}{=} \PY{n}{cvxopt}\PY{o}{.}\PY{n}{matrix}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{outer}\PY{p}{(}\PY{n}{y}\PY{p}{,}\PY{n}{y}\PY{p}{)} \PY{o}{*} \PY{n}{K}\PY{p}{)} \PY{c+c1}{\PYZsh{} can be singular }
+                 
+                 \PY{n}{q} \PY{o}{=} \PY{n}{cvxopt}\PY{o}{.}\PY{n}{matrix}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{n}{n\PYZus{}samples}\PY{p}{)} \PY{o}{*} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+                 
+                 \PY{c+c1}{\PYZsh{} label Vector}
+                 
+                 \PY{n}{A} \PY{o}{=} \PY{n}{cvxopt}\PY{o}{.}\PY{n}{matrix}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{n\PYZus{}samples}\PY{p}{)}\PY{p}{)} 
+                 
+                 \PY{n}{b} \PY{o}{=} \PY{n}{cvxopt}\PY{o}{.}\PY{n}{matrix}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{)}
+                 
+                 \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{C} \PY{o+ow}{is} \PY{k+kc}{None}\PY{p}{:}
+                     \PY{n}{G} \PY{o}{=} \PY{n}{cvxopt}\PY{o}{.}\PY{n}{matrix}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{diag}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{n}{n\PYZus{}samples}\PY{p}{)} \PY{o}{*} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+                     \PY{n}{h} \PY{o}{=} \PY{n}{cvxopt}\PY{o}{.}\PY{n}{matrix}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{n\PYZus{}samples}\PY{p}{)}\PY{p}{)}
+                 \PY{k}{else}\PY{p}{:} \PY{c+c1}{\PYZsh{} kernel is nontrivial.}
+                     \PY{n}{tmp1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{diag}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{n}{n\PYZus{}samples}\PY{p}{)} \PY{o}{*} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+                     \PY{n}{tmp2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{identity}\PY{p}{(}\PY{n}{n\PYZus{}samples}\PY{p}{)}
+                     \PY{n}{G} \PY{o}{=} \PY{n}{cvxopt}\PY{o}{.}\PY{n}{matrix}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{vstack}\PY{p}{(}\PY{p}{(}\PY{n}{tmp1}\PY{p}{,} \PY{n}{tmp2}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+                     \PY{n}{tmp1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{n\PYZus{}samples}\PY{p}{)}
+                     \PY{n}{tmp2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{n}{n\PYZus{}samples}\PY{p}{)} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{C}
+                     \PY{n}{h} \PY{o}{=} \PY{n}{cvxopt}\PY{o}{.}\PY{n}{matrix}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{hstack}\PY{p}{(}\PY{p}{(}\PY{n}{tmp1}\PY{p}{,} \PY{n}{tmp2}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         
+                 \PY{c+c1}{\PYZsh{} solve QP problem}
+                 \PY{n}{solution} \PY{o}{=} \PY{n}{cvxopt}\PY{o}{.}\PY{n}{solvers}\PY{o}{.}\PY{n}{qp}\PY{p}{(}\PY{n}{P}\PY{p}{,} \PY{n}{q}\PY{p}{,} \PY{n}{G}\PY{p}{,} \PY{n}{h}\PY{p}{,} \PY{n}{A}\PY{p}{,} \PY{n}{b}\PY{p}{)}
+         
+                 \PY{c+c1}{\PYZsh{} Lagrange multipliers}
+                 \PY{n}{a} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{ravel}\PY{p}{(}\PY{n}{solution}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         
+                 \PY{c+c1}{\PYZsh{} Support vectors have non zero lagrange multipliers}
+                 \PY{n}{sv} \PY{o}{=} \PY{n}{a} \PY{o}{\PYZgt{}} \PY{l+m+mf}{1e\PYZhy{}5}
+                 \PY{n}{ind} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{a}\PY{p}{)}\PY{p}{)}\PY{p}{[}\PY{n}{sv}\PY{p}{]}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{a} \PY{o}{=} \PY{n}{a}\PY{p}{[}\PY{n}{sv}\PY{p}{]}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{sv} \PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{n}{sv}\PY{p}{]}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{sv\PYZus{}y} \PY{o}{=} \PY{n}{y}\PY{p}{[}\PY{n}{sv}\PY{p}{]}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}0\PYZcb{}}\PY{l+s+s1}{ support vectors out of }\PY{l+s+si}{\PYZob{}1\PYZcb{}}\PY{l+s+s1}{ points}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{a}\PY{p}{)}\PY{p}{,} \PY{n}{n\PYZus{}samples}\PY{p}{)}\PY{p}{)}
+         
+                 \PY{c+c1}{\PYZsh{} Intercept}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{b} \PY{o}{=} \PY{l+m+mi}{0}
+                 \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{a}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                     \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{b} \PY{o}{+}\PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{sv\PYZus{}y}\PY{p}{[}\PY{n}{n}\PY{p}{]}
+                     \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{b} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{a} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{sv\PYZus{}y} \PY{o}{*} \PY{n}{K}\PY{p}{[}\PY{n}{ind}\PY{p}{[}\PY{n}{n}\PY{p}{]}\PY{p}{,}\PY{n}{sv}\PY{p}{]}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{b} \PY{o}{/}\PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{a}\PY{p}{)}
+         
+                 \PY{c+c1}{\PYZsh{} Weight vector}
+                 \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{kernel} \PY{o}{==} \PY{n}{linear\PYZus{}kernel}\PY{p}{:}
+                     \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{w} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{n\PYZus{}features}\PY{p}{)}
+                     \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{a}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                         \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{w} \PY{o}{+}\PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{a}\PY{p}{[}\PY{n}{n}\PY{p}{]} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{sv\PYZus{}y}\PY{p}{[}\PY{n}{n}\PY{p}{]} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{sv}\PY{p}{[}\PY{n}{n}\PY{p}{]}
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{w} \PY{o}{=} \PY{k+kc}{None}
+             
+             \PY{k}{def} \PY{n+nf}{project}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{X}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{w} \PY{o+ow}{is} \PY{o+ow}{not} \PY{k+kc}{None}\PY{p}{:}
+                     \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{w}\PY{p}{)} \PY{o}{+} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{b}
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{n}{y\PYZus{}predict} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{)}
+                     \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                         \PY{n}{s} \PY{o}{=} \PY{l+m+mi}{0}
+                         \PY{k}{for} \PY{n}{a}\PY{p}{,} \PY{n}{sv\PYZus{}y}\PY{p}{,} \PY{n}{sv} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{a}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{sv\PYZus{}y}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{sv}\PY{p}{)}\PY{p}{:}
+                             \PY{n}{s} \PY{o}{+}\PY{o}{=} \PY{n}{a} \PY{o}{*} \PY{n}{sv\PYZus{}y} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{kernel}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{sv}\PY{p}{)}
+                         \PY{n}{y\PYZus{}predict}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{s}
+                 \PY{k}{return} \PY{n}{y\PYZus{}predict} \PY{o}{+} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{b}
+         
+             \PY{k}{def} \PY{n+nf}{predict}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{X}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{sign}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{project}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+\vspace{5ex}
+    \indent The optimization problem of SVM can be rewrite as dual problem :
+\vspace{1ex}
+
+    \(\max_{\alpha} \sum_i^m \alpha_i - \frac{1}{2} \sum_{i,j}^m y^{(i)}y^{(j)} \alpha_i \alpha_j <x^{(i)} x^{(j)}>\)
+
+    Under condition :
+\(\begin{aligned} & \max_{\alpha} \sum_i^m \alpha_i - \frac{1}{2} \alpha^T \mathbf{H} \alpha \\  s.t. & \ \alpha_i \geq 0 \\ & \ \sum_i^m \alpha_i y^{(i)} = 0 \end{aligned}\)
+
+\vspace{1ex}
+    We Implement SVM on three nonlinear kernel :
+Gaussian,Polynomial,Sigmoid.
+
+\vspace{1ex}
+    The datas are very large. In particular ratio of two labeled datas is
+very big.
+
+\vspace{1ex}
+    Anyway cost time is highly required.
+
+\vspace{1ex}
+    So we only use the data with rabel 0 about 1 percent and 8 principal
+component of the data.
+
+\vspace{1ex}
+    For each kernel, we try to search suited hyperparameter.
+
+\vspace{1ex}
+    The key strategy is Random Cross validation for each step.
+
+\vspace{1ex}
+    We select one optimal svm from 9 candidate for each kernel
+
+\vspace{5ex}
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{k}{if} \PY{n+nv+vm}{\PYZus{}\PYZus{}name\PYZus{}\PYZus{}} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZus{}\PYZus{}main\PYZus{}\PYZus{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}
+             \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{pl}
+             
+             
+             \PY{k}{def} \PY{n+nf}{gen\PYZus{}non\PYZus{}lin\PYZus{}separable\PYZus{}data}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{X22} \PY{o}{=} \PY{n}{redata}\PY{p}{[}\PY{n}{label}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{]}
+                 
+                     
+             
+                 \PY{n}{X1} \PY{o}{=} \PY{n}{X\PYZus{}test1}
+                 \PY{n}{X2} \PY{o}{=} \PY{n}{X22}
+                 \PY{n}{y1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{X\PYZus{}test1}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{y2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{X2}\PY{p}{)}\PY{p}{)} \PY{o}{*} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}
+                 
+                 \PY{k}{return} \PY{n}{X1}\PY{p}{,} \PY{n}{y1}\PY{p}{,} \PY{n}{X2}\PY{p}{,} \PY{n}{y2}
+         
+             \PY{k}{def} \PY{n+nf}{split\PYZus{}train}\PY{p}{(}\PY{n}{X1}\PY{p}{,} \PY{n}{y1}\PY{p}{,} \PY{n}{X2}\PY{p}{,} \PY{n}{y2}\PY{p}{,}\PY{n}{i}\PY{p}{)}\PY{p}{:}
+                 
+         
+                 \PY{n}{rrkf} \PY{o}{=} \PY{n}{RepeatedKFold}\PY{p}{(}\PY{n}{n\PYZus{}splits}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{n\PYZus{}repeats}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{n}{i}\PY{p}{)} 
+         
+         
+                 \PY{k}{for} \PY{n}{train\PYZus{}index}\PY{p}{,} \PY{n}{test\PYZus{}index} \PY{o+ow}{in} \PY{n}{rrkf}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{n}{X1}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{Xtrain1}\PY{p}{,} \PY{n}{Xtest1}\PY{o}{=} \PY{n}{X1}\PY{p}{[}\PY{n}{train\PYZus{}index}\PY{p}{]}\PY{p}{,} \PY{n}{X1}\PY{p}{[}\PY{n}{test\PYZus{}index}\PY{p}{]}
+         
+         
+                 \PY{k}{for} \PY{n}{train\PYZus{}index}\PY{p}{,} \PY{n}{test\PYZus{}index} \PY{o+ow}{in} \PY{n}{rrkf}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{n}{X2}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{Xtrain2}\PY{p}{,} \PY{n}{Xtest2}\PY{o}{=} \PY{n}{X2}\PY{p}{[}\PY{n}{train\PYZus{}index}\PY{p}{]}\PY{p}{,} \PY{n}{X2}\PY{p}{[}\PY{n}{test\PYZus{}index}\PY{p}{]}
+         
+         
+         
+                 
+                 
+                 \PY{n}{X1\PYZus{}train} \PY{o}{=} \PY{n}{Xtrain1}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{l+m+mi}{8}\PY{p}{]}
+                 \PY{n}{y1\PYZus{}train} \PY{o}{=} \PY{n}{y1}\PY{p}{[}\PY{p}{:}\PY{n+nb}{len}\PY{p}{(}\PY{n}{Xtrain1}\PY{p}{)}\PY{p}{]}
+                 \PY{n}{X2\PYZus{}train} \PY{o}{=} \PY{n}{Xtrain2}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{l+m+mi}{8}\PY{p}{]}
+                 \PY{n}{y2\PYZus{}train} \PY{o}{=} \PY{n}{y2}\PY{p}{[}\PY{p}{:}\PY{n+nb}{len}\PY{p}{(}\PY{n}{Xtrain2}\PY{p}{)}\PY{p}{]}
+                 \PY{n}{X\PYZus{}train} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{vstack}\PY{p}{(}\PY{p}{(}\PY{n}{X1\PYZus{}train}\PY{p}{,} \PY{n}{X2\PYZus{}train}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{y\PYZus{}train} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{hstack}\PY{p}{(}\PY{p}{(}\PY{n}{y1\PYZus{}train}\PY{p}{,} \PY{n}{y2\PYZus{}train}\PY{p}{)}\PY{p}{)}
+                 
+                 \PY{n}{X1\PYZus{}test} \PY{o}{=} \PY{n}{Xtest1}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{l+m+mi}{8}\PY{p}{]}
+                 \PY{n}{y1\PYZus{}test} \PY{o}{=} \PY{n}{y1}\PY{p}{[}\PY{p}{:}\PY{n+nb}{len}\PY{p}{(}\PY{n}{Xtest1}\PY{p}{)}\PY{p}{]}
+                 \PY{n}{X2\PYZus{}test} \PY{o}{=} \PY{n}{Xtest2}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{l+m+mi}{8}\PY{p}{]}
+                 \PY{n}{y2\PYZus{}test} \PY{o}{=} \PY{n}{y2}\PY{p}{[}\PY{p}{:}\PY{n+nb}{len}\PY{p}{(}\PY{n}{Xtest2}\PY{p}{)}\PY{p}{]}
+                 \PY{n}{X\PYZus{}test} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{vstack}\PY{p}{(}\PY{p}{(}\PY{n}{X1\PYZus{}test}\PY{p}{,} \PY{n}{X2\PYZus{}test}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{hstack}\PY{p}{(}\PY{p}{(}\PY{n}{y1\PYZus{}test}\PY{p}{,} \PY{n}{y2\PYZus{}test}\PY{p}{)}\PY{p}{)}
+                 
+                 \PY{k}{return} \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test}
+             
+             
+             
+             \PY{k}{def} \PY{n+nf}{plot\PYZus{}contour}\PY{p}{(}\PY{n}{X1\PYZus{}train}\PY{p}{,} \PY{n}{X2\PYZus{}train}\PY{p}{,} \PY{n}{clf}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{pl}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{X1\PYZus{}train}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{100}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{X1\PYZus{}train}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{100}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ro}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{ms}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+                 \PY{n}{pl}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{X2\PYZus{}train}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{100}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{X2\PYZus{}train}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{100}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{bo}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{ms}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+                 \PY{n}{pl}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{clf}\PY{o}{.}\PY{n}{sv}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{100}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{clf}\PY{o}{.}\PY{n}{sv}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{100}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{g}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                 
+                 \PY{n}{X1}\PY{p}{,} \PY{n}{X2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{meshgrid}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{500}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{500}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{n}{x1}\PY{p}{,} \PY{n}{x2}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]} \PY{k}{for} \PY{n}{x1}\PY{p}{,} \PY{n}{x2} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{ravel}\PY{p}{(}\PY{n}{X1}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{ravel}\PY{p}{(}\PY{n}{X2}\PY{p}{)}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{Z1} \PY{o}{=} \PY{n}{clf}\PY{o}{.}\PY{n}{project}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+                 \PY{n}{Z}\PY{o}{=}\PY{n}{Z1}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{X1}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+                 \PY{n}{pl}\PY{o}{.}\PY{n}{contour}\PY{p}{(}\PY{n}{X1}\PY{p}{,} \PY{n}{X2}\PY{p}{,} \PY{n}{Z}\PY{p}{,} \PY{p}{[}\PY{l+m+mf}{0.0}\PY{p}{]}\PY{p}{,} \PY{n}{colors}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{linewidths}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{origin}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lower}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 \PY{n}{pl}\PY{o}{.}\PY{n}{contour}\PY{p}{(}\PY{n}{X1}\PY{p}{,} \PY{n}{X2}\PY{p}{,} \PY{n}{Z} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{,} \PY{p}{[}\PY{l+m+mf}{0.0}\PY{p}{]}\PY{p}{,} \PY{n}{colors}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{grey}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{linewidths}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{origin}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lower}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 \PY{n}{pl}\PY{o}{.}\PY{n}{contour}\PY{p}{(}\PY{n}{X1}\PY{p}{,} \PY{n}{X2}\PY{p}{,} \PY{n}{Z} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{,} \PY{p}{[}\PY{l+m+mf}{0.0}\PY{p}{]}\PY{p}{,} \PY{n}{colors}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{grey}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{linewidths}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{origin}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lower}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 
+                 \PY{n}{pl}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tight}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                 \PY{n}{pl}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+             
+             \PY{k}{def} \PY{n+nf}{test\PYZus{}non\PYZus{}linear1}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                 
+                 \PY{n}{X1}\PY{p}{,} \PY{n}{y1}\PY{p}{,} \PY{n}{X2}\PY{p}{,} \PY{n}{y2} \PY{o}{=} \PY{n}{gen\PYZus{}non\PYZus{}lin\PYZus{}separable\PYZus{}data}\PY{p}{(}\PY{p}{)}
+                 
+                 \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{:}
+         
+         
+                     \PY{k}{def} \PY{n+nf}{gaussian\PYZus{}kernel}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{sigma}\PY{o}{=}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{:}
+                         \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{linalg}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{x}\PY{o}{\PYZhy{}}\PY{n}{y}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{/} \PY{p}{(}\PY{l+m+mi}{2} \PY{o}{*} \PY{p}{(}\PY{n}{sigma} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         
+                     \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{split\PYZus{}train}\PY{p}{(}\PY{n}{X1}\PY{p}{,} \PY{n}{y1}\PY{p}{,} \PY{n}{X2}\PY{p}{,} \PY{n}{y2}\PY{p}{,}\PY{n}{i}\PY{p}{)}
+         
+         
+         
+         
+                     \PY{n}{clf} \PY{o}{=} \PY{n}{SVM}\PY{p}{(}\PY{n}{gaussian\PYZus{}kernel}\PY{p}{)}
+                     \PY{n}{clf}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+         
+                     \PY{n}{y\PYZus{}predict} \PY{o}{=} \PY{n}{clf}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+                     \PY{n}{correct} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{y\PYZus{}predict} \PY{o}{==} \PY{n}{y\PYZus{}test}\PY{p}{)}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}0\PYZcb{}}\PY{l+s+s1}{ out of }\PY{l+s+si}{\PYZob{}1\PYZcb{}}\PY{l+s+s1}{ predictions correct}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{correct}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{y\PYZus{}predict}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         
+                 \PY{c+c1}{\PYZsh{}plot\PYZus{}contour(X\PYZus{}train[y\PYZus{}train==1], X\PYZus{}train[y\PYZus{}train==\PYZhy{}1], clf)}
+         
+         
+             \PY{k}{def} \PY{n+nf}{test\PYZus{}non\PYZus{}linear11}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                 
+                 \PY{n}{X1}\PY{p}{,} \PY{n}{y1}\PY{p}{,} \PY{n}{X2}\PY{p}{,} \PY{n}{y2} \PY{o}{=} \PY{n}{gen\PYZus{}non\PYZus{}lin\PYZus{}separable\PYZus{}data}\PY{p}{(}\PY{p}{)}
+                 
+                 \PY{k}{def} \PY{n+nf}{gaussian\PYZus{}kernel}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{sigma}\PY{o}{=}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{:}
+                         \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{linalg}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{x}\PY{o}{\PYZhy{}}\PY{n}{y}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{/} \PY{p}{(}\PY{l+m+mi}{2} \PY{o}{*} \PY{p}{(}\PY{n}{sigma} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         
+                 \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{split\PYZus{}train}\PY{p}{(}\PY{n}{X1}\PY{p}{,} \PY{n}{y1}\PY{p}{,} \PY{n}{X2}\PY{p}{,} \PY{n}{y2}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}
+         
+         
+         
+         
+                 \PY{n}{clf} \PY{o}{=} \PY{n}{SVM}\PY{p}{(}\PY{n}{gaussian\PYZus{}kernel}\PY{p}{)}
+                 \PY{n}{clf}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+         
+                 \PY{n}{y\PYZus{}predict} \PY{o}{=} \PY{n}{clf}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+                 \PY{n}{correct} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{y\PYZus{}predict} \PY{o}{==} \PY{n}{y\PYZus{}test}\PY{p}{)}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}0\PYZcb{}}\PY{l+s+s1}{ out of }\PY{l+s+si}{\PYZob{}1\PYZcb{}}\PY{l+s+s1}{ predictions correct}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{correct}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{y\PYZus{}predict}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+                 
+                 \PY{n}{plot\PYZus{}contour}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{[}\PY{n}{y\PYZus{}train}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{X\PYZus{}train}\PY{p}{[}\PY{n}{y\PYZus{}train}\PY{o}{==}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{clf}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{}test\PYZus{}non\PYZus{}linear1()}
+             \PY{c+c1}{\PYZsh{}test\PYZus{}non\PYZus{}linear2()}
+             \PY{c+c1}{\PYZsh{}test\PYZus{}non\PYZus{}linear3()}
+\end{Verbatim}
+
+\vspace{5ex}
+\vspace{1ex}
+    \(\large Set\ Optimal\ parameter\ for\ gaussian\ as\ sigma=6\ \)
+
+\vspace{1ex}
+
+    \(\large Plotting\ 2\ principal\ component\ parts\ and\ margin(Gaussian\ kernel).\)
+
+\vspace{1ex}
+\vspace{5ex}
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}62}]:} \PY{k}{def} \PY{n+nf}{test\PYZus{}non\PYZus{}linear11}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+         
+             \PY{n}{X1}\PY{p}{,} \PY{n}{y1}\PY{p}{,} \PY{n}{X2}\PY{p}{,} \PY{n}{y2} \PY{o}{=} \PY{n}{gen\PYZus{}non\PYZus{}lin\PYZus{}separable\PYZus{}data}\PY{p}{(}\PY{p}{)}
+         
+             \PY{k}{def} \PY{n+nf}{gaussian\PYZus{}kernel}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{sigma}\PY{o}{=}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{:}
+                     \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{linalg}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{x}\PY{o}{\PYZhy{}}\PY{n}{y}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{/} \PY{p}{(}\PY{l+m+mi}{2} \PY{o}{*} \PY{p}{(}\PY{n}{sigma} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         
+             \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{split\PYZus{}train}\PY{p}{(}\PY{n}{X1}\PY{p}{,} \PY{n}{y1}\PY{p}{,} \PY{n}{X2}\PY{p}{,} \PY{n}{y2}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}
+         
+         
+         
+         
+             \PY{n}{clf} \PY{o}{=} \PY{n}{SVM}\PY{p}{(}\PY{n}{gaussian\PYZus{}kernel}\PY{p}{)}
+             \PY{n}{clf}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+         
+             \PY{n}{y\PYZus{}predict} \PY{o}{=} \PY{n}{clf}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+             \PY{n}{correct} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{y\PYZus{}predict} \PY{o}{==} \PY{n}{y\PYZus{}test}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}0\PYZcb{}}\PY{l+s+s1}{ out of }\PY{l+s+si}{\PYZob{}1\PYZcb{}}\PY{l+s+s1}{ predictions correct}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{correct}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{y\PYZus{}predict}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         
+             \PY{n}{plot\PYZus{}contour}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{[}\PY{n}{y\PYZus{}train}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{X\PYZus{}train}\PY{p}{[}\PY{n}{y\PYZus{}train}\PY{o}{==}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{clf}\PY{p}{)}
+         \PY{n}{test\PYZus{}non\PYZus{}linear11}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+     pcost       dcost       gap    pres   dres
+ 0: -3.3355e+02 -1.0972e+03  1e+04  8e+01  3e+00
+ 1: -1.1584e+03 -3.1834e+03  1e+04  6e+01  3e+00
+ 2: -4.0089e+03 -9.4922e+03  1e+04  5e+01  2e+00
+ 3: -8.5590e+03 -1.5693e+04  1e+04  4e+01  2e+00
+ 4: -1.6815e+04 -2.6165e+04  1e+04  4e+01  1e+00
+ 5: -3.4211e+04 -4.7006e+04  2e+04  3e+01  1e+00
+ 6: -8.4975e+04 -1.0453e+05  2e+04  3e+01  1e+00
+ 7: -1.7687e+05 -2.0707e+05  3e+04  3e+01  1e+00
+ 8: -4.0894e+05 -4.6275e+05  6e+04  3e+01  1e+00
+ 9: -7.8081e+05 -8.6882e+05  9e+04  3e+01  1e+00
+10: -1.3039e+06 -1.4383e+06  1e+05  3e+01  1e+00
+11: -2.5119e+06 -2.7506e+06  2e+05  3e+01  1e+00
+12: -3.5629e+06 -3.8858e+06  3e+05  3e+01  1e+00
+13: -6.6417e+06 -7.1978e+06  6e+05  3e+01  1e+00
+14: -9.5466e+06 -1.0305e+07  8e+05  3e+01  1e+00
+15: -1.3868e+07 -1.4924e+07  1e+06  3e+01  1e+00
+16: -2.3347e+07 -2.5098e+07  2e+06  3e+01  1e+00
+17: -3.0540e+07 -3.2900e+07  2e+06  3e+01  1e+00
+18: -4.7551e+07 -5.1656e+07  4e+06  3e+01  1e+00
+19: -7.0039e+07 -7.7138e+07  7e+06  3e+01  1e+00
+20: -1.2565e+08 -1.4318e+08  2e+07  2e+01  1e+00
+21: -2.2957e+08 -2.7695e+08  5e+07  2e+01  9e-01
+22: -3.9113e+08 -4.9528e+08  1e+08  1e+01  6e-01
+23: -4.6103e+08 -5.1575e+08  5e+07  4e+00  2e-01
+24: -4.6379e+08 -4.7000e+08  6e+06  1e-02  5e-04
+25: -4.6655e+08 -4.6914e+08  3e+06  5e-03  2e-04
+26: -4.6810e+08 -4.6872e+08  6e+05  3e-05  1e-06
+27: -4.6859e+08 -4.6868e+08  8e+04  1e-06  2e-07
+28: -4.6866e+08 -4.6867e+08  6e+03  9e-08  2e-07
+29: -4.6867e+08 -4.6867e+08  9e+01  2e-07  2e-07
+30: -4.6867e+08 -4.6867e+08  1e+00  2e-07  2e-07
+31: -4.6867e+08 -4.6867e+08  1e-02  7e-07  3e-07
+32: -4.6867e+08 -4.6867e+08  1e-04  2e-06  5e-07
+33: -4.6867e+08 -4.6867e+08  1e-06  1e-06  5e-07
+34: -4.6867e+08 -4.6867e+08  2e-08  6e-08  1e-07
+35: -4.6867e+08 -4.6867e+08  2e-08  2e-07  8e-08
+36: -4.6867e+08 -4.6867e+08  2e-10  2e-07  9e-08
+Terminated (singular KKT matrix).
+235 support vectors out of 3002 points
+314 out of 333 predictions correct
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_28_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}64}]:} \PY{k}{def} \PY{n+nf}{test\PYZus{}non\PYZus{}linear2}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{n}{X1}\PY{p}{,} \PY{n}{y1}\PY{p}{,} \PY{n}{X2}\PY{p}{,} \PY{n}{y2} \PY{o}{=} \PY{n}{gen\PYZus{}non\PYZus{}lin\PYZus{}separable\PYZus{}data}\PY{p}{(}\PY{p}{)}
+             
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{:}
+         
+         
+                 \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{split\PYZus{}train}\PY{p}{(}\PY{n}{X1}\PY{p}{,} \PY{n}{y1}\PY{p}{,} \PY{n}{X2}\PY{p}{,} \PY{n}{y2}\PY{p}{,}\PY{n}{i}\PY{p}{)}
+         
+                 \PY{k}{def} \PY{n+nf}{polynomial\PYZus{}kernel}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{p}\PY{o}{=}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                     \PY{k}{return} \PY{p}{(}\PY{l+m+mi}{1} \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{)} \PY{o}{*}\PY{o}{*} \PY{n}{p}
+                 \PY{n}{clf} \PY{o}{=} \PY{n}{SVM}\PY{p}{(}\PY{n}{polynomial\PYZus{}kernel}\PY{p}{)}
+                 \PY{n}{clf}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+         
+                 \PY{n}{y\PYZus{}predict} \PY{o}{=} \PY{n}{clf}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+                 \PY{n}{correct} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{y\PYZus{}predict} \PY{o}{==} \PY{n}{y\PYZus{}test}\PY{p}{)}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}0\PYZcb{}}\PY{l+s+s1}{ out of }\PY{l+s+si}{\PYZob{}1\PYZcb{}}\PY{l+s+s1}{ predictions correct}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{correct}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{y\PYZus{}predict}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         
+                \PY{c+c1}{\PYZsh{} plot\PYZus{}contour(X\PYZus{}train[y\PYZus{}train==1], X\PYZus{}train[y\PYZus{}train==\PYZhy{}1], clf)\PYZbs{}}
+         
+         \PY{n}{test\PYZus{}non\PYZus{}linear2}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+     pcost       dcost       gap    pres   dres
+ 0: -4.6762e+02 -1.4739e+03  2e+04  1e+02  3e+00
+ 1: -1.3954e+03 -3.7898e+03  2e+04  1e+02  3e+00
+ 2: -4.1897e+03 -1.0552e+04  2e+04  9e+01  3e+00
+ 3: -9.0326e+03 -1.8430e+04  2e+04  7e+01  2e+00
+ 4: -1.4842e+04 -2.7171e+04  2e+04  7e+01  2e+00
+ 5: -2.5503e+04 -4.0859e+04  2e+04  6e+01  2e+00
+ 6: -3.4088e+04 -5.2276e+04  2e+04  5e+01  2e+00
+ 7: -4.8159e+04 -7.0154e+04  3e+04  5e+01  1e+00
+ 8: -7.7840e+04 -1.0685e+05  3e+04  5e+01  1e+00
+ 9: -9.9471e+04 -1.3389e+05  4e+04  5e+01  1e+00
+10: -2.2173e+05 -2.7498e+05  6e+04  4e+01  1e+00
+11: -4.5695e+05 -5.4464e+05  9e+04  4e+01  1e+00
+12: -1.3964e+06 -1.5759e+06  2e+05  4e+01  1e+00
+13: -3.8942e+06 -4.2918e+06  4e+05  4e+01  1e+00
+14: -9.7093e+06 -1.0562e+07  9e+05  4e+01  1e+00
+15: -1.0021e+08 -1.0235e+08  2e+06  4e+01  1e+00
+16: -3.1088e+09 -3.1335e+09  2e+07  4e+01  1e+00
+17: -4.0998e+10 -4.1293e+10  3e+08  4e+01  1e+00
+18: -4.1772e+10 -4.2073e+10  3e+08  4e+01  1e+00
+19: -4.3213e+10 -4.3523e+10  3e+08  4e+01  1e+00
+20: -4.5232e+10 -4.5555e+10  3e+08  4e+01  1e+00
+21: -5.1185e+10 -5.1549e+10  4e+08  4e+01  1e+00
+22: -5.3636e+10 -5.4014e+10  4e+08  4e+01  1e+00
+23: -5.7082e+10 -5.7484e+10  4e+08  4e+01  1e+00
+Terminated (singular KKT matrix).
+3002 support vectors out of 3002 points
+284 out of 333 predictions correct
+     pcost       dcost       gap    pres   dres
+ 0: -3.3278e+02 -1.0310e+03  2e+04  1e+02  3e+00
+ 1: -1.1627e+03 -3.0284e+03  2e+04  9e+01  3e+00
+ 2: -3.4745e+03 -8.1723e+03  2e+04  8e+01  2e+00
+ 3: -7.2742e+03 -1.4000e+04  2e+04  6e+01  2e+00
+ 4: -1.2229e+04 -2.0552e+04  2e+04  6e+01  2e+00
+ 5: -1.9002e+04 -2.9025e+04  2e+04  5e+01  2e+00
+ 6: -2.9795e+04 -4.2288e+04  2e+04  5e+01  1e+00
+ 7: -4.6683e+04 -6.2712e+04  2e+04  4e+01  1e+00
+ 8: -6.9174e+04 -8.9886e+04  3e+04  4e+01  1e+00
+ 9: -1.1316e+05 -1.4223e+05  4e+04  4e+01  1e+00
+10: -1.2429e+05 -1.5549e+05  4e+04  4e+01  1e+00
+11: -1.8872e+05 -2.3107e+05  5e+04  4e+01  1e+00
+12: -2.7545e+05 -3.3205e+05  6e+04  4e+01  1e+00
+13: -3.4290e+05 -4.1031e+05  8e+04  4e+01  1e+00
+14: -4.1063e+05 -4.8853e+05  9e+04  4e+01  1e+00
+15: -4.7621e+05 -5.6392e+05  1e+05  4e+01  1e+00
+16: -5.5702e+05 -6.5653e+05  1e+05  4e+01  1e+00
+17: -6.7069e+05 -7.8638e+05  1e+05  4e+01  1e+00
+18: -7.7115e+05 -9.0080e+05  1e+05  4e+01  1e+00
+19: -9.7198e+05 -1.1283e+06  2e+05  4e+01  1e+00
+20: -1.1597e+06 -1.3407e+06  2e+05  4e+01  1e+00
+21: -1.3687e+06 -1.5763e+06  2e+05  4e+01  1e+00
+22: -1.9029e+06 -2.1749e+06  3e+05  4e+01  1e+00
+23: -2.0436e+06 -2.3328e+06  3e+05  4e+01  1e+00
+24: -2.5371e+06 -2.8847e+06  4e+05  4e+01  1e+00
+25: -3.3331e+06 -3.7713e+06  5e+05  4e+01  1e+00
+26: -4.9982e+06 -5.6141e+06  7e+05  4e+01  1e+00
+27: -6.5403e+06 -7.3178e+06  8e+05  4e+01  1e+00
+28: -7.4247e+06 -8.2943e+06  9e+05  4e+01  1e+00
+29: -8.9091e+06 -9.9297e+06  1e+06  4e+01  1e+00
+30: -1.1459e+07 -1.2730e+07  1e+06  4e+01  1e+00
+31: -1.3585e+07 -1.5062e+07  2e+06  4e+01  1e+00
+32: -1.8521e+07 -2.0457e+07  2e+06  4e+01  1e+00
+33: -2.0586e+07 -2.2713e+07  2e+06  4e+01  1e+00
+34: -3.1912e+07 -3.5033e+07  3e+06  4e+01  1e+00
+35: -5.4415e+07 -5.9399e+07  5e+06  4e+01  1e+00
+36: -5.7316e+07 -6.2542e+07  5e+06  4e+01  1e+00
+37: -6.5757e+07 -7.1679e+07  6e+06  4e+01  1e+00
+38: -8.2461e+07 -8.9730e+07  7e+06  4e+01  1e+00
+39: -8.3288e+07 -9.0623e+07  7e+06  4e+01  1e+00
+40: -2.3577e+08 -2.5347e+08  2e+07  4e+01  1e+00
+41: -4.2619e+08 -4.5638e+08  3e+07  4e+01  1e+00
+42: -1.0630e+09 -1.1309e+09  7e+07  4e+01  1e+00
+43: -2.0053e+09 -2.1265e+09  1e+08  4e+01  1e+00
+44: -1.8146e+10 -1.8740e+10  6e+08  3e+01  1e+00
+45: -3.1586e+10 -3.2598e+10  1e+09  3e+01  1e+00
+46: -5.5939e+10 -5.7671e+10  2e+09  3e+01  1e+00
+47: -1.1227e+11 -1.1559e+11  3e+09  3e+01  1e+00
+48: -1.7704e+11 -1.8203e+11  5e+09  3e+01  1e+00
+49: -2.0056e+11 -2.0593e+11  5e+09  3e+01  1e+00
+50: -2.0484e+11 -2.1022e+11  5e+09  3e+01  1e+00
+Terminated (singular KKT matrix).
+3002 support vectors out of 3002 points
+301 out of 333 predictions correct
+     pcost       dcost       gap    pres   dres
+ 0: -2.0993e+02 -6.3507e+02  2e+04  9e+01  3e+00
+ 1: -8.4098e+02 -2.0382e+03  1e+04  7e+01  2e+00
+ 2: -2.1280e+03 -4.2305e+03  1e+04  6e+01  2e+00
+ 3: -3.1546e+03 -5.3692e+03  1e+04  5e+01  2e+00
+ 4: -5.1765e+03 -7.4599e+03  1e+04  4e+01  1e+00
+ 5: -8.0625e+03 -1.0276e+04  1e+04  4e+01  1e+00
+ 6: -1.0824e+04 -1.2953e+04  1e+04  4e+01  1e+00
+ 7: -1.3656e+04 -1.5557e+04  1e+04  3e+01  1e+00
+ 8: -1.9052e+04 -2.0189e+04  2e+04  3e+01  1e+00
+ 9: -2.4565e+04 -2.5451e+04  2e+04  3e+01  1e+00
+10: -3.1892e+04 -3.1642e+04  2e+04  3e+01  1e+00
+11: -3.2130e+04 -3.0024e+04  2e+04  3e+01  9e-01
+12: -2.7959e+04 -2.2431e+04  3e+04  2e+01  8e-01
+13: -1.6130e+04 -8.6478e+03  3e+04  1e+01  5e-01
+14: -8.6633e+03 -3.4514e+03  2e+04  8e+00  3e-01
+15: -6.0328e+03 -2.2646e+03  2e+04  6e+00  2e-01
+16: -2.7718e+03 -1.1031e+03  8e+03  3e+00  1e-01
+17: -1.5034e+03 -7.8071e+02  6e+03  2e+00  6e-02
+18: -9.8643e+02 -6.3799e+02  4e+03  1e+00  4e-02
+19: -4.5460e+02 -4.6285e+02  2e+03  5e-01  2e-02
+20: -2.7792e+02 -3.7536e+02  2e+03  3e-01  1e-02
+21: -1.6857e+02 -2.8533e+02  9e+02  1e-01  5e-03
+22: -1.1418e+02 -2.5423e+02  7e+02  9e-02  3e-03
+23: -1.0284e+02 -2.0641e+02  4e+02  5e-02  2e-03
+24: -8.5016e+01 -1.7367e+02  3e+02  3e-02  9e-04
+25: -7.6584e+01 -1.5795e+02  2e+02  2e-02  6e-04
+26: -8.0441e+01 -1.3281e+02  2e+02  1e-02  3e-04
+27: -7.6295e+01 -1.1955e+02  1e+02  6e-03  2e-04
+28: -7.3471e+01 -1.1228e+02  1e+02  4e-03  1e-04
+29: -7.4712e+01 -1.0328e+02  7e+01  3e-03  9e-05
+30: -7.6748e+01 -9.5592e+01  5e+01  2e-03  6e-05
+31: -7.5661e+01 -9.2489e+01  4e+01  1e-03  4e-05
+32: -7.3042e+01 -9.0397e+01  4e+01  9e-04  3e-05
+33: -7.1746e+01 -8.9705e+01  4e+01  8e-04  3e-05
+34: -7.5213e+01 -8.5775e+01  2e+01  4e-04  1e-05
+35: -7.5075e+01 -8.4728e+01  2e+01  3e-04  9e-06
+36: -7.5757e+01 -8.3452e+01  1e+01  2e-04  5e-06
+37: -7.5813e+01 -8.3025e+01  1e+01  1e-04  4e-06
+38: -7.5272e+01 -8.2489e+01  1e+01  9e-05  3e-06
+39: -7.5255e+01 -8.1744e+01  1e+01  6e-05  2e-06
+40: -7.5338e+01 -8.1250e+01  9e+00  5e-05  2e-06
+41: -7.5452e+01 -8.0685e+01  9e+00  4e-05  1e-06
+42: -7.5203e+01 -8.0078e+01  8e+00  3e-05  1e-06
+43: -7.5153e+01 -7.9919e+01  8e+00  3e-05  1e-06
+44: -7.5189e+01 -7.9613e+01  8e+00  3e-05  1e-06
+45: -7.5350e+01 -7.9106e+01  7e+00  2e-05  8e-07
+46: -7.5292e+01 -7.8481e+01  7e+00  2e-05  6e-07
+47: -7.5379e+01 -7.8047e+01  6e+00  1e-05  5e-07
+48: -7.4654e+01 -7.7563e+01  6e+00  1e-05  3e-07
+49: -7.4555e+01 -7.7416e+01  6e+00  9e-06  3e-07
+50: -7.4628e+01 -7.7129e+01  5e+00  7e-06  3e-07
+51: -7.4374e+01 -7.6831e+01  5e+00  6e-06  2e-07
+52: -7.4365e+01 -7.6367e+01  4e+00  5e-06  2e-07
+53: -7.4033e+01 -7.6037e+01  4e+00  3e-06  1e-07
+54: -7.3997e+01 -7.5915e+01  4e+00  3e-06  9e-08
+55: -7.3627e+01 -7.5629e+01  3e+00  2e-06  5e-08
+56: -7.3670e+01 -7.5506e+01  3e+00  1e-06  4e-08
+57: -7.3661e+01 -7.5447e+01  3e+00  1e-06  4e-08
+58: -7.3993e+01 -7.5166e+01  2e+00  7e-07  2e-08
+59: -7.3817e+01 -7.5013e+01  2e+00  4e-07  1e-08
+60: -7.4002e+01 -7.4933e+01  2e+00  3e-07  1e-08
+61: -7.4054e+01 -7.4849e+01  1e+00  1e-07  9e-09
+62: -7.4697e+01 -7.4769e+01  8e-02  1e-09  5e-09
+63: -7.4760e+01 -7.4763e+01  3e-03  5e-11  6e-09
+64: -7.4763e+01 -7.4763e+01  5e-05  8e-13  7e-09
+Optimal solution found.
+206 support vectors out of 3002 points
+304 out of 333 predictions correct
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+        ---------------------------------------------------------------------------
+
+        ArithmeticError                           Traceback (most recent call last)
+
+        D:\textbackslash{}anaconda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}cvxopt\textbackslash{}misc.py in factor(W, H, Df)
+       1428                 if type(F['S']) is matrix:
+    -> 1429                     lapack.potrf(F['S'])
+       1430                 else:
+    
+
+        ArithmeticError: 2609
+
+        
+    During handling of the above exception, another exception occurred:
+    
+
+        ArithmeticError                           Traceback (most recent call last)
+
+        D:\textbackslash{}anaconda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}cvxopt\textbackslash{}coneprog.py in coneqp(P, q, G, h, dims, A, b, initvals, kktsolver, xnewcopy, xdot, xaxpy, xscal, ynewcopy, ydot, yaxpy, yscal, **kwargs)
+       2064         for rti in W['rti']: rti[::rti.size[0]+1 ] = 1.0
+    -> 2065         try: f = kktsolver(W)
+       2066         except ArithmeticError:
+    
+
+        D:\textbackslash{}anaconda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}cvxopt\textbackslash{}coneprog.py in kktsolver(W)
+       1980          def kktsolver(W):
+    -> 1981              return factor(W, P)
+       1982 
+    
+
+        D:\textbackslash{}anaconda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}cvxopt\textbackslash{}misc.py in factor(W, H, Df)
+       1443                 if type(F['S']) is matrix:
+    -> 1444                     lapack.potrf(F['S'])
+       1445                 else:
+    
+
+        ArithmeticError: 2608
+
+        
+    During handling of the above exception, another exception occurred:
+    
+
+        ValueError                                Traceback (most recent call last)
+
+        <ipython-input-64-797eb3e21b5a> in <module>
+         19        \# plot\_contour(X\_train[y\_train==1], X\_train[y\_train==-1], clf)\textbackslash{}
+         20 
+    ---> 21 test\_non\_linear2()
+    
+
+        <ipython-input-64-797eb3e21b5a> in test\_non\_linear2()
+         11             return (1 + np.dot(x, y)) ** p
+         12         clf = SVM(polynomial\_kernel)
+    ---> 13         clf.fit(X\_train, y\_train)
+         14 
+         15         y\_predict = clf.predict(X\_test)
+    
+
+        <ipython-input-41-577f5dab5dbf> in fit(self, X, y)
+         37 
+         38         \# solve QP problem
+    ---> 39         solution = cvxopt.solvers.qp(P, q, G, h, A, b)
+         40 
+         41         \# Lagrange multipliers
+    
+
+        D:\textbackslash{}anaconda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}cvxopt\textbackslash{}coneprog.py in qp(P, q, G, h, A, b, solver, kktsolver, initvals, **kwargs)
+       4485             'residual as dual infeasibility certificate': dinfres\}
+       4486 
+    -> 4487     return coneqp(P, q, G, h, None, A,  b, initvals, kktsolver = kktsolver, options = options)
+    
+
+        D:\textbackslash{}anaconda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}cvxopt\textbackslash{}coneprog.py in coneqp(P, q, G, h, dims, A, b, initvals, kktsolver, xnewcopy, xdot, xaxpy, xscal, ynewcopy, ydot, yaxpy, yscal, **kwargs)
+       2065         try: f = kktsolver(W)
+       2066         except ArithmeticError:
+    -> 2067             raise ValueError("Rank(A) < p or Rank([P; A; G]) < n")
+       2068 
+       2069 
+    
+
+        ValueError: Rank(A) < p or Rank([P; A; G]) < n
+
+    \end{Verbatim}
+
+\vspace{5ex}
+    when P is singular, an error is occur in CVXOPT.
+
+\vspace{1ex}
+ As the output of the
+kernel is so low at high degree, it can be occured.
+
+\vspace{1ex}
+
+    \(\large Plotting\ 2\ principal\ component\ parts\ and\ margin(Polykernel).\)
+
+\vspace{1ex}
+    \(\large Optimal\ parameter\ is\ 4\)
+
+
+\vspace{1ex}
+
+\vspace{1ex}
+\vspace{5ex}
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}72}]:} \PY{k}{def} \PY{n+nf}{test\PYZus{}non\PYZus{}linear2}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{n}{X1}\PY{p}{,} \PY{n}{y1}\PY{p}{,} \PY{n}{X2}\PY{p}{,} \PY{n}{y2} \PY{o}{=} \PY{n}{gen\PYZus{}non\PYZus{}lin\PYZus{}separable\PYZus{}data}\PY{p}{(}\PY{p}{)}
+             
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{:}
+         
+         
+                 \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{split\PYZus{}train}\PY{p}{(}\PY{n}{X1}\PY{p}{,} \PY{n}{y1}\PY{p}{,} \PY{n}{X2}\PY{p}{,} \PY{n}{y2}\PY{p}{,}\PY{n}{i}\PY{p}{)}
+         
+                 \PY{k}{def} \PY{n+nf}{polynomial\PYZus{}kernel}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{p}\PY{o}{=}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                     \PY{k}{return} \PY{p}{(}\PY{l+m+mi}{1} \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{)} \PY{o}{*}\PY{o}{*} \PY{n}{p}
+                 \PY{n}{clf} \PY{o}{=} \PY{n}{SVM}\PY{p}{(}\PY{n}{polynomial\PYZus{}kernel}\PY{p}{)}
+                 \PY{n}{clf}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+         
+                 \PY{n}{y\PYZus{}predict} \PY{o}{=} \PY{n}{clf}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+                 \PY{n}{correct} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{y\PYZus{}predict} \PY{o}{==} \PY{n}{y\PYZus{}test}\PY{p}{)}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}0\PYZcb{}}\PY{l+s+s1}{ out of }\PY{l+s+si}{\PYZob{}1\PYZcb{}}\PY{l+s+s1}{ predictions correct}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{correct}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{y\PYZus{}predict}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         
+                 \PY{n}{plot\PYZus{}contour}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{[}\PY{n}{y\PYZus{}train}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{X\PYZus{}train}\PY{p}{[}\PY{n}{y\PYZus{}train}\PY{o}{==}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{clf}\PY{p}{)}
+         
+         \PY{n}{test\PYZus{}non\PYZus{}linear2}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+     pcost       dcost       gap    pres   dres
+ 0: -2.0993e+02 -6.3507e+02  2e+04  9e+01  3e+00
+ 1: -8.4098e+02 -2.0382e+03  1e+04  7e+01  2e+00
+ 2: -2.1280e+03 -4.2305e+03  1e+04  6e+01  2e+00
+ 3: -3.1546e+03 -5.3692e+03  1e+04  5e+01  2e+00
+ 4: -5.1765e+03 -7.4599e+03  1e+04  4e+01  1e+00
+ 5: -8.0625e+03 -1.0276e+04  1e+04  4e+01  1e+00
+ 6: -1.0824e+04 -1.2953e+04  1e+04  4e+01  1e+00
+ 7: -1.3656e+04 -1.5557e+04  1e+04  3e+01  1e+00
+ 8: -1.9052e+04 -2.0189e+04  2e+04  3e+01  1e+00
+ 9: -2.4565e+04 -2.5451e+04  2e+04  3e+01  1e+00
+10: -3.1892e+04 -3.1642e+04  2e+04  3e+01  1e+00
+11: -3.2130e+04 -3.0024e+04  2e+04  3e+01  9e-01
+12: -2.7959e+04 -2.2431e+04  3e+04  2e+01  8e-01
+13: -1.6130e+04 -8.6478e+03  3e+04  1e+01  5e-01
+14: -8.6633e+03 -3.4514e+03  2e+04  8e+00  3e-01
+15: -6.0328e+03 -2.2646e+03  2e+04  6e+00  2e-01
+16: -2.7718e+03 -1.1031e+03  8e+03  3e+00  1e-01
+17: -1.5034e+03 -7.8071e+02  6e+03  2e+00  6e-02
+18: -9.8643e+02 -6.3799e+02  4e+03  1e+00  4e-02
+19: -4.5460e+02 -4.6285e+02  2e+03  5e-01  2e-02
+20: -2.7792e+02 -3.7536e+02  2e+03  3e-01  1e-02
+21: -1.6857e+02 -2.8533e+02  9e+02  1e-01  5e-03
+22: -1.1418e+02 -2.5423e+02  7e+02  9e-02  3e-03
+23: -1.0284e+02 -2.0641e+02  4e+02  5e-02  2e-03
+24: -8.5016e+01 -1.7367e+02  3e+02  3e-02  9e-04
+25: -7.6584e+01 -1.5795e+02  2e+02  2e-02  6e-04
+26: -8.0441e+01 -1.3281e+02  2e+02  1e-02  3e-04
+27: -7.6295e+01 -1.1955e+02  1e+02  6e-03  2e-04
+28: -7.3471e+01 -1.1228e+02  1e+02  4e-03  1e-04
+29: -7.4712e+01 -1.0328e+02  7e+01  3e-03  9e-05
+30: -7.6748e+01 -9.5592e+01  5e+01  2e-03  6e-05
+31: -7.5661e+01 -9.2489e+01  4e+01  1e-03  4e-05
+32: -7.3042e+01 -9.0397e+01  4e+01  9e-04  3e-05
+33: -7.1746e+01 -8.9705e+01  4e+01  8e-04  3e-05
+34: -7.5213e+01 -8.5775e+01  2e+01  4e-04  1e-05
+35: -7.5075e+01 -8.4728e+01  2e+01  3e-04  9e-06
+36: -7.5757e+01 -8.3452e+01  1e+01  2e-04  5e-06
+37: -7.5813e+01 -8.3025e+01  1e+01  1e-04  4e-06
+38: -7.5272e+01 -8.2489e+01  1e+01  9e-05  3e-06
+39: -7.5255e+01 -8.1744e+01  1e+01  6e-05  2e-06
+40: -7.5338e+01 -8.1250e+01  9e+00  5e-05  2e-06
+41: -7.5452e+01 -8.0685e+01  9e+00  4e-05  1e-06
+42: -7.5203e+01 -8.0078e+01  8e+00  3e-05  1e-06
+43: -7.5153e+01 -7.9919e+01  8e+00  3e-05  1e-06
+44: -7.5189e+01 -7.9613e+01  8e+00  3e-05  1e-06
+45: -7.5350e+01 -7.9106e+01  7e+00  2e-05  8e-07
+46: -7.5292e+01 -7.8481e+01  7e+00  2e-05  6e-07
+47: -7.5379e+01 -7.8047e+01  6e+00  1e-05  5e-07
+48: -7.4654e+01 -7.7563e+01  6e+00  1e-05  3e-07
+49: -7.4555e+01 -7.7416e+01  6e+00  9e-06  3e-07
+50: -7.4628e+01 -7.7129e+01  5e+00  7e-06  3e-07
+51: -7.4374e+01 -7.6831e+01  5e+00  6e-06  2e-07
+52: -7.4365e+01 -7.6367e+01  4e+00  5e-06  2e-07
+53: -7.4033e+01 -7.6037e+01  4e+00  3e-06  1e-07
+54: -7.3997e+01 -7.5915e+01  4e+00  3e-06  9e-08
+55: -7.3627e+01 -7.5629e+01  3e+00  2e-06  5e-08
+56: -7.3670e+01 -7.5506e+01  3e+00  1e-06  4e-08
+57: -7.3661e+01 -7.5447e+01  3e+00  1e-06  4e-08
+58: -7.3993e+01 -7.5166e+01  2e+00  7e-07  2e-08
+59: -7.3817e+01 -7.5013e+01  2e+00  4e-07  1e-08
+60: -7.4002e+01 -7.4933e+01  2e+00  3e-07  1e-08
+61: -7.4054e+01 -7.4849e+01  1e+00  1e-07  9e-09
+62: -7.4697e+01 -7.4769e+01  8e-02  1e-09  5e-09
+63: -7.4760e+01 -7.4763e+01  3e-03  5e-11  6e-09
+64: -7.4763e+01 -7.4763e+01  5e-05  8e-13  7e-09
+Optimal solution found.
+206 support vectors out of 3002 points
+304 out of 333 predictions correct
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_33_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \(\large sigmoid\ kernel.\)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{k}{def} \PY{n+nf}{test\PYZus{}non\PYZus{}linear3}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{n}{X1}\PY{p}{,} \PY{n}{y1}\PY{p}{,} \PY{n}{X2}\PY{p}{,} \PY{n}{y2} \PY{o}{=} \PY{n}{gen\PYZus{}non\PYZus{}lin\PYZus{}separable\PYZus{}data}\PY{p}{(}\PY{p}{)}
+             
+             
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{split\PYZus{}train}\PY{p}{(}\PY{n}{X1}\PY{p}{,} \PY{n}{y1}\PY{p}{,} \PY{n}{X2}\PY{p}{,} \PY{n}{y2}\PY{p}{,}\PY{n}{i}\PY{p}{)}
+         
+         
+                 \PY{k}{def} \PY{n+nf}{sigmoid\PYZus{}kernel}\PY{p}{(}\PY{n}{x1}\PY{p}{,}\PY{n}{x2}\PY{p}{,}\PY{n}{k}\PY{o}{=}\PY{l+m+mf}{0.0001}\PY{p}{,}\PY{n}{theta}\PY{o}{=}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{10}\PY{p}{)}\PY{o}{*}\PY{n}{i}\PY{p}{)}\PY{p}{:}
+                     \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{tanh}\PY{p}{(}\PY{n}{k}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{x1}\PY{p}{,}\PY{n}{x2}\PY{p}{)}\PY{o}{+}\PY{n}{theta}\PY{p}{)} 
+         
+                 \PY{n}{clf} \PY{o}{=} \PY{n}{SVM}\PY{p}{(}\PY{n}{sigmoid\PYZus{}kernel}\PY{p}{)}
+                 \PY{n}{clf}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+         
+                 \PY{n}{y\PYZus{}predict} \PY{o}{=} \PY{n}{clf}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+                 \PY{n}{correct} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{y\PYZus{}predict} \PY{o}{==} \PY{n}{y\PYZus{}test}\PY{p}{)}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}0\PYZcb{}}\PY{l+s+s1}{ out of }\PY{l+s+si}{\PYZob{}1\PYZcb{}}\PY{l+s+s1}{ predictions correct}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{correct}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{y\PYZus{}predict}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{}plot\PYZus{}contour(X\PYZus{}train[y\PYZus{}train==1], X\PYZus{}train[y\PYZus{}train==\PYZhy{}1], clf)}
+             
+         \PY{n}{test\PYZus{}non\PYZus{}linear3}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+     pcost       dcost       gap    pres   dres
+ 0: -1.6308e+03 -4.6327e+03  3e+03  7e-13  3e+00
+ 1: -3.0763e+03 -3.1330e+03  6e+01  5e-13  1e+00
+ 2: -1.7136e+05 -1.7140e+05  4e+01  6e-11  1e+00
+ 3: -6.1499e+06 -6.1516e+06  2e+03  3e-09  1e+00
+ 4: -6.5241e+06 -6.5258e+06  2e+03  2e-09  1e+00
+ 5: -3.5220e+07 -3.5227e+07  7e+03  2e-09  1e+00
+ 6: -6.6807e+07 -6.6821e+07  1e+04  4e-08  1e+00
+ 7: -3.7489e+08 -3.7497e+08  8e+04  3e-07  1e+00
+ 8: -4.7712e+08 -4.7722e+08  1e+05  1e-07  1e+00
+ 9: -9.8653e+08 -9.8673e+08  2e+05  6e-08  1e+00
+10: -3.4519e+09 -3.4526e+09  7e+05  6e-08  1e+00
+11: -3.7484e+09 -3.7492e+09  8e+05  1e-06  1e+00
+12: -8.7620e+09 -8.7638e+09  2e+06  5e-06  1e+00
+13: -8.9256e+09 -8.9275e+09  2e+06  1e-07  1e+00
+14: -2.6584e+10 -2.6589e+10  5e+06  1e-05  1e+00
+15: -6.1587e+10 -6.1600e+10  1e+07  1e-05  1e+00
+16: -1.0280e+11 -1.0282e+11  2e+07  8e-06  1e+00
+17: -1.2948e+11 -1.2951e+11  3e+07  6e-05  1e+00
+18: -2.3689e+11 -2.3694e+11  5e+07  1e-04  1e+00
+19: -4.4292e+11 -4.4301e+11  9e+07  1e-04  1e+00
+20: -7.7107e+11 -7.7123e+11  2e+08  1e-04  1e+00
+21: -1.2223e+12 -1.2225e+12  2e+08  4e-04  1e+00
+22: -1.4797e+12 -1.4800e+12  3e+08  1e-04  1e+00
+23: -2.1399e+12 -2.1403e+12  4e+08  1e-03  1e+00
+24: -3.2329e+12 -3.2335e+12  6e+08  4e-04  1e+00
+25: -4.0929e+12 -4.0936e+12  7e+08  3e-04  1e+00
+26: -5.9142e+12 -5.9151e+12  9e+08  5e-04  1e+00
+27: -6.7287e+12 -6.7296e+12  9e+08  2e-03  1e+00
+Terminated (singular KKT matrix).
+5561 support vectors out of 5561 points
+568 out of 617 predictions correct
+     pcost       dcost       gap    pres   dres
+ 0: -1.6308e+03 -4.6327e+03  3e+03  1e-11  3e+00
+ 1: -3.0763e+03 -3.1330e+03  6e+01  4e-12  1e+00
+ 2: -1.7153e+05 -1.7156e+05  3e+01  6e-11  1e+00
+ 3: -9.2289e+08 -9.2289e+08  2e+03  1e-06  1e+00
+ 4: -1.7651e+13 -1.7651e+13  3e+07  4e-03  1e+00
+Terminated (singular KKT matrix).
+5561 support vectors out of 5561 points
+568 out of 617 predictions correct
+     pcost       dcost       gap    pres   dres
+ 0: -1.6308e+03 -4.6327e+03  3e+03  1e-11  3e+00
+ 1: -3.0763e+03 -3.1330e+03  6e+01  4e-12  1e+00
+ 2: -1.7153e+05 -1.7156e+05  3e+01  6e-11  1e+00
+ 3: -9.2289e+08 -9.2289e+08  2e+03  1e-06  1e+00
+ 4: -1.7651e+13 -1.7651e+13  3e+07  4e-03  1e+00
+Terminated (singular KKT matrix).
+5561 support vectors out of 5561 points
+568 out of 617 predictions correct
+     pcost       dcost       gap    pres   dres
+ 0: -1.6308e+03 -4.6327e+03  3e+03  1e-11  3e+00
+ 1: -3.0763e+03 -3.1330e+03  6e+01  4e-12  1e+00
+ 2: -1.7153e+05 -1.7156e+05  3e+01  6e-11  1e+00
+ 3: -9.2289e+08 -9.2289e+08  2e+03  1e-06  1e+00
+ 4: -1.7651e+13 -1.7651e+13  3e+07  4e-03  1e+00
+Terminated (singular KKT matrix).
+5561 support vectors out of 5561 points
+568 out of 617 predictions correct
+     pcost       dcost       gap    pres   dres
+ 0: -1.6308e+03 -4.6327e+03  3e+03  1e-11  3e+00
+ 1: -3.0763e+03 -3.1330e+03  6e+01  4e-12  1e+00
+ 2: -1.7153e+05 -1.7156e+05  3e+01  6e-11  1e+00
+ 3: -9.2289e+08 -9.2289e+08  2e+03  1e-06  1e+00
+ 4: -1.7651e+13 -1.7651e+13  3e+07  4e-03  1e+00
+Terminated (singular KKT matrix).
+5561 support vectors out of 5561 points
+568 out of 617 predictions correct
+     pcost       dcost       gap    pres   dres
+ 0: -1.6308e+03 -4.6327e+03  3e+03  1e-11  3e+00
+ 1: -3.0763e+03 -3.1330e+03  6e+01  4e-12  1e+00
+ 2: -1.7153e+05 -1.7156e+05  3e+01  6e-11  1e+00
+ 3: -9.2289e+08 -9.2289e+08  2e+03  1e-06  1e+00
+ 4: -1.7651e+13 -1.7651e+13  3e+07  4e-03  1e+00
+Terminated (singular KKT matrix).
+5561 support vectors out of 5561 points
+568 out of 617 predictions correct
+     pcost       dcost       gap    pres   dres
+ 0: -1.6308e+03 -4.6327e+03  3e+03  1e-11  3e+00
+ 1: -3.0763e+03 -3.1330e+03  6e+01  4e-12  1e+00
+ 2: -1.7153e+05 -1.7156e+05  3e+01  6e-11  1e+00
+ 3: -9.2289e+08 -9.2289e+08  2e+03  1e-06  1e+00
+ 4: -1.7651e+13 -1.7651e+13  3e+07  4e-03  1e+00
+Terminated (singular KKT matrix).
+5561 support vectors out of 5561 points
+568 out of 617 predictions correct
+     pcost       dcost       gap    pres   dres
+ 0: -1.6308e+03 -4.6327e+03  3e+03  1e-11  3e+00
+ 1: -3.0763e+03 -3.1330e+03  6e+01  4e-12  1e+00
+ 2: -1.7153e+05 -1.7156e+05  3e+01  6e-11  1e+00
+ 3: -9.2289e+08 -9.2289e+08  2e+03  1e-06  1e+00
+ 4: -1.7651e+13 -1.7651e+13  3e+07  4e-03  1e+00
+Terminated (singular KKT matrix).
+5561 support vectors out of 5561 points
+568 out of 617 predictions correct
+     pcost       dcost       gap    pres   dres
+ 0: -1.6308e+03 -4.6327e+03  3e+03  1e-11  3e+00
+ 1: -3.0763e+03 -3.1330e+03  6e+01  4e-12  1e+00
+ 2: -1.7153e+05 -1.7156e+05  3e+01  6e-11  1e+00
+ 3: -9.2289e+08 -9.2289e+08  2e+03  1e-06  1e+00
+ 4: -1.7651e+13 -1.7651e+13  3e+07  4e-03  1e+00
+Terminated (singular KKT matrix).
+5561 support vectors out of 5561 points
+568 out of 617 predictions correct
+
+    \end{Verbatim}
+
+    I conclude Sigmoid kernels are not Inadequate.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
